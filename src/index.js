@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     {/*<App />*/}
     {/*  <SignUp/>*/}
+    {/*<ProductAdd/>*/}
       <SignIn/>
   </React.StrictMode>
 );
