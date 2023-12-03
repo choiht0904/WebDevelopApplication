@@ -38,7 +38,7 @@ function ProductAddForm() {
           <form action="/insert" method="post" encType="multipart/form-data">
             상품 이름 : <input type="text" name="title" /><br />
             상품 사진 : <input type="file" name="images" /> <br />
-            가격 등록 : <input type="number" names="prices" /><br/>
+            가격 : <input type="number" names="prices" /><br/>
             <textarea rows="5" cols="40" name="content"></textarea><br />
             <input type="submit" value="추가" />
           </form>
