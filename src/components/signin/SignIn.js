@@ -12,24 +12,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                개가좋다
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({pageTo = (str) => {}}) {
     const handleSubmit = (event) => {
         let backend = process.env.REACT_APP_BACKEND_URL;
         event.preventDefault();
@@ -43,10 +29,15 @@ export default function SignIn() {
             .then(res => {
                 console.log(res.data);
                 localStorage.setItem("token", res.data.token);
+                pageTo('/index');
             })
             .catch(err => {
                 console.error(err);
             });
+    };
+
+    const handleRedirect = () => {
+        pageTo('/signup');
     };
 
     return (
@@ -98,14 +89,13 @@ export default function SignIn() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
+                                <a href={"#"} onClick={handleRedirect}>
+                                    Don't have an account? Sign Up
+                                </a>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
         </ThemeProvider>
     );

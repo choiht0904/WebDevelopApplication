@@ -12,24 +12,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                개가좋다
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({pageTo = (str) => {}}) {
     const handleSubmit = (event) => {
         let backend = process.env.REACT_APP_BACKEND_URL;
 
@@ -44,10 +29,15 @@ export default function SignUp() {
         axios.post('http://' + backend + '/users', postData)
             .then(res => {
                 console.log(res.data);
+                pageTo('/signin');
             })
             .catch(err => {
                 console.error(err);
             });
+    };
+
+    const handleRedirect = () => {
+        pageTo('/signin');
     };
 
     return (
@@ -110,14 +100,13 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <a href="#" onClick={handleRedirect}>
                                     Already have an account? Sign in
-                                </Link>
+                                </a>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 5 }} />
             </Container>
         </ThemeProvider>
     );
