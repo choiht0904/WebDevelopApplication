@@ -1,24 +1,21 @@
-import logo from '../assets/logo.svg';
 import '../styles/App.css';
+import {useState} from "react";
+import SignUp from "./signup/SignUp";
+import SignIn from "./signin/SignIn";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function App() {
+  const [current, setCurrent] = useState('/signin');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className={"App"}>
+        <Header event={setCurrent}/>
+        {current === '/signup' && <SignUp pageTo={setCurrent}/>}
+        {current === '/signin' && <SignIn pageTo={setCurrent}/>}
+        {/*<SubmitOn/>*/}
+        <Footer/>
+      </div>
   );
 }
 

@@ -73,6 +73,7 @@ export default function SubmitOn() {
     return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <ProductAddForm onSubmit={handleSubmit} />
         <Copyright sx={{ mt: 5 }} />
       </Container>
