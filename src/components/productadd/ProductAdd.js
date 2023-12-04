@@ -25,27 +25,6 @@ function Copyright(props) {
         </Typography>
     );
 }
-
-function ProductAddForm() {
-    return (
-      <html lang="en">
-        <head>
-          <meta charSet="UTF-8" />
-          <title>상품 등록 페이지</title>
-        </head>
-        <body>
-          <h1>상품 등록 페이지</h1>
-          <form action="/insert" method="post" encType="multipart/form-data">
-            상품 이름 : <input type="text" name="title" /><br />
-            상품 사진 : <input type="file" name="images" /> <br />
-            가격 : <input type="number" names="prices" /><br/>
-            <textarea rows="5" cols="40" name="content"></textarea><br />
-            <input type="submit" value="추가" />
-          </form>
-        </body>
-      </html>
-    );
-}
 const defaultTheme = createTheme();
 
 export default function SubmitOn() {
@@ -69,14 +48,86 @@ export default function SubmitOn() {
           console.error(err);
         });
     };
-  
     return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <ProductAddForm onSubmit={handleSubmit} />
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
+        <ThemeProvider theme={defaultTheme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}>
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        상품 등록
+                    </Typography>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="given-title"
+                                    name="title"
+                                    required
+                                    fullWidth
+                                    id="title"
+                                    label="Title"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="images"
+                                    label="Images Address"
+                                    name="images"
+                                    autoComplete="images"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="prices"
+                                    label="Prices"
+                                    type="prices"
+                                    id="prices"
+                                    autoComplete="new-prices"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="content"
+                                    label="Content"
+                                    type="content"
+                                    id="content"
+                                    autoComplete="new-content"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}>
+                            등록하기
+                        </Button>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    Already have an account? Sign in
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+                <Copyright sx={{ mt: 5 }} />
+            </Container>
+        </ThemeProvider>
     );
 }

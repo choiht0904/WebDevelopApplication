@@ -2,6 +2,7 @@ import '../styles/App.css';
 import {useState} from "react";
 import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
+import ProductAdd from "./productadd/ProductAdd";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Search } from '@mui/icons-material';
