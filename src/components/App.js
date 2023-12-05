@@ -14,6 +14,7 @@ function App() {
         <div className={"container"}>
             {current === '/signup' && <SignUp pageTo={setCurrent}/>}
             {current === '/signin' && <SignIn pageTo={setCurrent}/>}
+            {current === '/search' && <Search pageTo={setCurrent}/>}
             {/*<SubmitOn/>*/}
         </div>
         <Footer/>
