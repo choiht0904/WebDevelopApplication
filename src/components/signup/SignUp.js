@@ -26,13 +26,13 @@ export default function SignUp({pageTo = (str) => {}}) {
             email: data.get('email'),
             password: data.get('password'),
         }
-        axios.post('http://' + backend + '/users', postData)
+        axios.post(`http://${backend}/users`, postData)
             .then(res => {
-                console.log(res.data);
+                alert("Sign up Success");
                 pageTo('/signin');
             })
             .catch(err => {
-                console.error(err);
+                alert("Sign up Fail");
             });
     };
 
