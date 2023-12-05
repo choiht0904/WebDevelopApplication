@@ -4,6 +4,7 @@ import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Header from "./Header";
 import Footer from "./Footer";
+import SubmitOn from "./search/Search";
 
 function App() {
   const [current, setCurrent] = useState('/signin');
@@ -14,7 +15,7 @@ function App() {
         <div className={"container"}>
             {current === '/signup' && <SignUp pageTo={setCurrent}/>}
             {current === '/signin' && <SignIn pageTo={setCurrent}/>}
-            {current === '/search' && <Search pageTo={setCurrent}/>}
+            {current === '/search' && <SubmitOn pageTo={setCurrent}/>}
             {/*<SubmitOn/>*/}
         </div>
         <Footer/>
