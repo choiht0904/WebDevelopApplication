@@ -1,119 +1,120 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
+/*
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Typography, Container, Grid, Card, CardContent, CardMedia, createTheme, ThemeProvider } from '@mui/material';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        개가좋다
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const theme = createTheme();
 
-function ProductAddForm() {
-  return (
-    <form action="/insert" method="post" encType="multipart/form-data">
-      <Typography component="h1" variant="h5">
-        상품 등록 페이지
-      </Typography>
-      <TextField label="상품 이름" type="text" name="title" fullWidth margin="normal" required />
-      <TextField label="상품 사진" type="file" name="images" fullWidth margin="normal" required />
-      <TextField label="가격" type="number" name="prices" fullWidth margin="normal" required />
-      <TextField
-        label="상품 설명"
-        multiline
-        rows={5}
-        cols={40}
-        name="content"
-        fullWidth
-        margin="normal"
-        required
-      />
-      <Button type="submit" variant="contained" color="primary">
-        추가
-      </Button>
-    </form>
-  );
-}
+const ProductListPage = () => {
+  const [products, setProducts] = useState([]);
 
-const defaultTheme = createTheme();
-
-export default function SubmitOn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let backend = process.env.REACT_APP_BACKEND_URL;
-    const data = new FormData(event.currentTarget);
-
-    const productsData = {
-      title: data.get('title'),
-      images: data.get('images'),
-      prices: data.get('prices'),
-      content: data.get('content'),
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const backend = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(`http://${backend}/products`);
+        console.log('Data from server:', response.data);//데이터 정상적으로 받아오고  있는지..
+        setProducts(response.data.products); // 서버에서 받은 데이터에서 products 배열만 추출
+      } catch (err) {
+        console.error(err);
+      }
     };
 
-    axios
-      .post(`http://${backend}/products`, productsData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const handleSearch = (query) => {
-    // Add logic to handle the search query (e.g., send request to the backend)
-    console.log('Search Query:', query);
-  };
+    fetchProducts();
+  }, []);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <SearchBar onSearch={handleSearch} />
-        <ProductAddForm onSubmit={handleSubmit} />
-        <Copyright sx={{ mt: 5 }} />
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="md" style={{ marginTop: theme.spacing(4) }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          상품 목록
+        </Typography>
+        <Grid container spacing={2}>
+          {products.map((product) => (
+            <Grid item key={product.id} xs={12} sm={6} md={4}>
+              <Card style={{ maxWidth: 345, margin: theme.spacing(2) }}>
+                <CardMedia
+                  style={{ height: 140 }}
+                  image={product.images}
+                  title={product.title}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {product.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    가격: ${product.prices}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    설명: {product.content}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </ThemeProvider>
   );
-}
+};
 
-function SearchBar({ onSearch }) {
-  const [searchQuery, setSearchQuery] = React.useState('');
+export default ProductListPage;
+*/
 
-  const handleSearch = () => {
-    // Pass the search query to the parent component
-    onSearch(searchQuery);
-  };
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Typography, Container, Grid, Card, CardContent, createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme();
+
+const ProductListPage = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const backend = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(`http://${backend}/products`);
+        console.log('Data from server:', response.data);
+
+        // products 배열이 정의되지 않았을 때 대비하여 초기값 설정
+        setProducts(response.data.products || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
-    <div>
-      <TextField
-        label="검색"
-        variant="outlined"
-        fullWidth
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <IconButton color="primary" onClick={handleSearch}>
-        <SearchIcon />
-      </IconButton>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="md" style={{ marginTop: theme.spacing(4) }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          상품 목록
+        </Typography>
+        <Grid container spacing={2}>
+          {products.map((product) => (
+            <Grid item key={product.id} xs={12} sm={6} md={4}>
+              <Card style={{ maxWidth: 345, margin: theme.spacing(2) }}>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {product.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    가격: ${product.prices}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    설명: {product.content}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </ThemeProvider>
   );
-}
+};
+
+export default ProductListPage;
