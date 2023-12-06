@@ -25,14 +25,13 @@ export default function SignIn({pageTo = (str) => {}}) {
             password: data.get('password'),
         }
 
-        axios.post('http://' + backend + '/login', postData)
+        axios.post(`http://${backend}/login`, postData)
             .then(res => {
-                console.log(res.data);
                 localStorage.setItem("token", res.data.token);
                 pageTo('/index');
             })
             .catch(err => {
-                console.error(err);
+                alert("Sign in Fail");
             });
     };
 
