@@ -4,10 +4,10 @@ import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Header from "./Header";
 import Footer from "./Footer";
-import Search from "./search/Search";
+import ProductList from "./productlist/ProductList";
 
 function App() {
-  const [current, setCurrent] = useState('/search');
+  const [current, setCurrent] = useState('/productlist');
   
   return (
     
@@ -16,7 +16,7 @@ function App() {
         <div className={"container"}>
             {current === '/signup' && <SignUp pageTo={setCurrent}/>}
             {current === '/signin' && <SignIn pageTo={setCurrent}/>}
-            {current === '/search' && <Search pageTo={setCurrent}/>}
+            {current === '/productlist' && <ProductList pageTo={setCurrent}/>}
             {/*<SubmitOn/>*/}
         </div>
         <Footer/>
