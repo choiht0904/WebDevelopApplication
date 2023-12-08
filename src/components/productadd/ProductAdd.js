@@ -25,6 +25,7 @@ function Copyright(props) {
         </Typography>
     );
 }
+
 const defaultTheme = createTheme();
 
 export default function SubmitOn() {
@@ -48,6 +49,7 @@ export default function SubmitOn() {
           console.error(err);
         });
     };
+  
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
@@ -130,4 +132,14 @@ export default function SubmitOn() {
             </Container>
         </ThemeProvider>
     );
-}
+}// api 호출하기
+const getProducts = async () => {
+  try {
+    let url = 'http://54.180.124.30:59322/products';
+    let response = await fetch(url);
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+};

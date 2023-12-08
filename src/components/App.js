@@ -4,25 +4,23 @@ import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Search } from '@mui/icons-material';
+import Search from "./search/Search";
 
 function App() {
   const [current, setCurrent] = useState('/search');
-
+  
   return (
-      <div className={"App"}>
-        <Header event={setCurrent}/>
-        {current === '/signup' && <SignUp pageTo={setCurrent}/>}
-        {current === '/signin' && <SignIn pageTo={setCurrent}/>}
-        {current === '/search' && <Search pageTo={setCurrent}/>}
-        {/*<SubmitOn/>*/}
+    
+      <div className={"App"} style={{width:"100%", height:"100%"}}>
+        <Header pageTo={setCurrent}/>
+        <div className={"container"}>
+            {current === '/signup' && <SignUp pageTo={setCurrent}/>}
+            {current === '/signin' && <SignIn pageTo={setCurrent}/>}
+            {current === '/search' && <Search pageTo={setCurrent}/>}
+            {/*<SubmitOn/>*/}
+        </div>
         <Footer/>
       </div>
   );
 }
-
 export default App;
-/*
-{current === '/productadd' && <ProductAdd pageTo={setCurrent}/>}
-{current === '/signup' && <SignUp pageTo={setCurrent}/>}
-        {current === '/signin' && <SignIn pageTo={setCurrent}/>}*/
