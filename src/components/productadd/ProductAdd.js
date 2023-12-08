@@ -14,32 +14,59 @@ import axios from "axios";
 
 
 function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                개가좋다
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
+  return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+          {'Copyright © '}
+          <Link color="inherit" href="https://mui.com/">
+              개가좋다
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+      </Typography>
+  );
 }
 
 const defaultTheme = createTheme();
-
 export default function SubmitOn() {
+    const [imageSrc, setImageSrc] = React.useState('');
+    const FileSelected = () => {
+        
+  
+        const handleFileChange = (event) => {
+        const file = event.target.files[0];
+  
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = e =>{
+                setImageSrc(e.target.result)
+                console.log(file.path)
+            };
+        }
+    };
+  
+    return (
+      <Button
+      variant="contained"
+      component="label">
+
+        <input type="file" onChange={handleFileChange} />
+        {imageSrc && <img src={imageSrc} alt="Uploaded"/>}
+      </Button>
+    );
+  };
     const handleSubmit = (event) => {
       event.preventDefault();
       let backend = process.env.REACT_APP_BACKEND_URL;
       const data = new FormData(event.currentTarget);
   
-      const productsData = {
-        title: data.get('title'),
-        images: data.get('images'),
-        prices: data.get('prices'),
-        content: data.get('content'),
-      };
+        
+        const productsData = {
+          title: data.get('title'),
+          images: imageSrc,
+          prices: data.get('prices'),
+          content: data.get('content'),
+        };
   
       axios.post(`http://${backend}/products`, productsData)
         .then(res => {
@@ -49,7 +76,6 @@ export default function SubmitOn() {
           console.error(err);
         });
     };
-  
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
@@ -132,14 +158,4 @@ export default function SubmitOn() {
             </Container>
         </ThemeProvider>
     );
-}// api 호출하기
-const getProducts = async () => {
-  try {
-    let url = 'http://54.180.124.30:59322/products';
-    let response = await fetch(url);
-    let data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-};
+}
