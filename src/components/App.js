@@ -4,6 +4,8 @@ import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Header from "./Header";
 import Footer from "./Footer";
+import Search from "./search/Search"
+import ProductList from "./productlist/ProductList";
 import SubmitOn from "./search/Search";
 import Profile from "./profile/Profile";
 import TeamIntro from "./teamIntro";
@@ -17,6 +19,8 @@ function App() {
         <div className={"container"}>
             {current === '/signup' && <SignUp pageTo={setCurrent}/>}
             {current === '/signin' && <SignIn pageTo={setCurrent}/>}
+            {current === '/search' && <Search pageTo={setCurrent}/>}
+            {current === '/productlist' && <ProductList pageTo={setCurrent}/>}
             {current === '/search' && <SubmitOn pageTo={setCurrent}/>}
             {current === '/profile' && <Profile pageTo={setCurrent}/> }
             {current === '/' && <TeamIntro/>}
