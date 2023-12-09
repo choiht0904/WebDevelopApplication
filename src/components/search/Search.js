@@ -1,7 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const theme = createTheme();
 
@@ -13,7 +15,7 @@ const ProductCard = ({ item, showDetail }) => (
         maxHeight: 600,
         margin: theme.spacing(2),
         cursor: 'pointer',
-        overflow: 'auto', //스크롤
+        overflow: 'auto',
       }}
       onClick={() => showDetail(item.id)}
     >
@@ -35,6 +37,7 @@ const ProductCard = ({ item, showDetail }) => (
 
 const ProductListPage = () => {
   const [productList, setProductList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const showDetail = (productId) => {
     console.log(`Navigate to product detail page: ${productId}`);
@@ -56,14 +59,31 @@ const ProductListPage = () => {
     getProducts();
   }, []);
 
+  // 사용자의 입력에 따라 상품 목록 필터링
+  const searchedProducts = productList.filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="md" style={{ marginTop: theme.spacing(4) }}>
         <Typography variant="h4" component="h1" gutterBottom>
           BEST ITEM
         </Typography>
+        {/* 검색 input 추가 */}
+        <Box sx={{display: 'flex',flexDirection: 'column',alignItems: 'center'}}>
+          <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <SearchIcon sx={{ color: 'primary.active', mr: 1, my: 0.5 }} />
+            <TextField
+              id="input-with-sx"
+              label="Search"
+              variant="standard"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}/>
+          </Box>
+        </Box>
         <Grid container spacing={2}>
-          {productList.map((product) => (
+          {searchedProducts.map((product) => (
             <ProductCard key={product.id} item={product} showDetail={showDetail} />
           ))}
         </Grid>
