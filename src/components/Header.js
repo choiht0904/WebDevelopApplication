@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 export default function Header({pageTo = (str) => {}}) {
     const handleProduct = () => {
-        pageTo('/product');
+        pageTo('/search');
     };
     const handleLogo = () => {
         pageTo('/');
