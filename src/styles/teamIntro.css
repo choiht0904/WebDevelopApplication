@@ -1,0 +1,36 @@
+
+
+#grid tr:nth-child(odd) {
+  background-color: skyblue;
+}
+
+#grid tr:nth-child(even) {
+  background-color: #0bff71;
+}
+
+
+.round {
+  border-radius: 10%;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  transform: scale(1.2);
+}
+
+.center {
+  background-image: url('../assets/background.jpg');
+  background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-height: 800px;
+  overflow-y: auto;
+}
+.bold {
+  font-size: 50px;
+  color: blue;
+}

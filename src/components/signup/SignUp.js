@@ -16,7 +16,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp({pageTo = (str) => {}}) {
     const handleSubmit = (event) => {
-        let backend = process.env.REACT_APP_BACKEND_URL;
+        const backend = process.env.REACT_APP_BACKEND_URL;
 
         event.preventDefault();
         const data = new FormData(event.currentTarget);
