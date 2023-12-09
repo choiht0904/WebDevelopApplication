@@ -13,54 +13,40 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
-
-function Copyright(props) {
-  return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-          {'Copyright © '}
-          <Link color="inherit" href="https://mui.com/">
-              개가좋다
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-      </Typography>
-  );
-}
 const defaultTheme = createTheme();
+
 export default function SubmitOn() {
     const [imageSrc, setImageSrc] = React.useState('');
     const FileSelected = () => {
-        
-  
         const handleFileChange = (event) => {
-        const file = event.target.files[0];
-  
-        if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = e =>{
-                setImageSrc(e.target.result)
-                console.log(file.path)
-            };
-        }
-    };
-  
-    return (
-      <Button
-      variant="contained"
-      component="label">
+            const file = event.target.files[0];
 
-        <Input
-        type="file"
-        inputProps={{
-          onChange: handleFileChange,
-        }}
-        style={{ display: 'none' }}
-      />이미지 업로드
-      {imageSrc && <img src={imageSrc} alt="Uploaded" />}
-      </Button>
-    );
-  };
+            if (file) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = e =>{
+                    setImageSrc(e.target.result)
+                    console.log(file.path)
+                };
+            }
+        };
+  
+        return (
+            <Button
+                sx={{width: "100%", mt: 1, mb: 1, ml: 1 }}
+                variant="contained"
+                component="label">
+                    <Input
+                        type="file"
+                        inputProps={{
+                            onChange: handleFileChange,
+                        }}
+                        style={{ display: 'none' }}
+                    />이미지 업로드
+                    {imageSrc && <img src={imageSrc} alt="Uploaded" />}
+            </Button>
+        );
+    };
     const handleSubmit = (event) => {
       event.preventDefault();
       let backend = process.env.REACT_APP_BACKEND_URL;
@@ -112,7 +98,7 @@ export default function SubmitOn() {
                                   autoFocus
                               />
                           </Grid>
-                          <FileSelected/>
+                          <FileSelected />
                           <Grid item xs={12}>
                               <TextField
                                   required
@@ -145,7 +131,6 @@ export default function SubmitOn() {
                       </Button>
                   </Box>
               </Box>
-              <Copyright sx={{ mt: 5 }} />
           </Container>
       </ThemeProvider>
   );

@@ -28,7 +28,7 @@ export default function SignIn({pageTo = (str) => {}}) {
         axios.post(`http://${backend}/login`, postData)
             .then(res => {
                 localStorage.setItem("token", res.data.token);
-                pageTo('/index');
+                pageTo('/');
             })
             .catch(err => {
                 alert("Sign in Fail");

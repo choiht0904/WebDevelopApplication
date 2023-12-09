@@ -20,8 +20,6 @@ function App() {
             {current === '/signup' && <SignUp pageTo={setCurrent}/>}
             {current === '/signin' && <SignIn pageTo={setCurrent}/>}
             {current === '/search' && <Search pageTo={setCurrent}/>}
-            {current === '/productlist' && <ProductList pageTo={setCurrent}/>}
-            {current === '/search' && <SubmitOn pageTo={setCurrent}/>}
             {current === '/profile' && <Profile pageTo={setCurrent}/>}
             {current === '/addProduct' && <SubmitOn/>}
             {current === '/' && <TeamIntro/>}
