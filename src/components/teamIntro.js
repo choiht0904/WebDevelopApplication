@@ -1,4 +1,4 @@
-import React from "react";
+import React     from "react";
 import '../styles/teamIntro.css';
 import img_icon from '../assets/dog-icon.png'
 import img_team1 from '../assets/유재영.jpg'
