@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Search from "./search/Search"
 import ProductList from "./productlist/ProductList";
-import SubmitOn from "./search/Search";
+import SubmitOn from "./productadd/ProductAdd";
 import Profile from "./profile/Profile";
 import TeamIntro from "./teamIntro";
 
@@ -22,9 +22,10 @@ function App() {
             {current === '/search' && <Search pageTo={setCurrent}/>}
             {current === '/productlist' && <ProductList pageTo={setCurrent}/>}
             {current === '/search' && <SubmitOn pageTo={setCurrent}/>}
-            {current === '/profile' && <Profile pageTo={setCurrent}/> }
+            {current === '/profile' && <Profile pageTo={setCurrent}/>}
+            {current === '/addProduct' && <SubmitOn/>}
             {current === '/' && <TeamIntro/>}
-            {/*<SubmitOn/>*/}
+
         </div>
         <Footer/>
       </div>

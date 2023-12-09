@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {useEffect, useState} from "react";
-import axios from "axios";
+
 export default function Header({pageTo = (str) => {}}) {
     const handleProduct = () => {
         pageTo('/search');
@@ -21,10 +21,14 @@ export default function Header({pageTo = (str) => {}}) {
         localStorage.removeItem('token');
         pageTo('/');
     };
-
     const handleProfile = () => {
         pageTo('/profile');
     };
+    const handleAddProduct = () => {
+        console.log('/addProduct');
+        pageTo('/addProduct');
+    };
+
     const [nav, setNav] = useState([
         <Button key="buttonSignIn" color="inherit" onClick={handleSignIn}>Sign In</Button>,
         <Button key="buttonSignUp" color="inherit" onClick={handleSignUp}>Sign Up</Button>
@@ -54,6 +58,7 @@ export default function Header({pageTo = (str) => {}}) {
                         개가좋다
                     </Typography>
                     <Button color="inherit" sx={{marginLeft: 'auto'}} onClick={handleProduct}>Product</Button>
+                    <Button color="inherit" onClick={handleAddProduct}>Add Product</Button>
                     {nav}
                 </Toolbar>
             </AppBar>

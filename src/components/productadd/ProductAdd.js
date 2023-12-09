@@ -13,20 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
 
-function Copyright(props) {
-  return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-          {'Copyright © '}
-          <Link color="inherit" href="https://mui.com/">
-              개가좋다
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-      </Typography>
-  );
-}
-
 const defaultTheme = createTheme();
+
 export default function SubmitOn() {
     const [imageSrc, setImageSrc] = React.useState('');
     const FileSelected = () => {
@@ -145,16 +133,8 @@ export default function SubmitOn() {
                             sx={{ mt: 3, mb: 2 }}>
                             등록하기
                         </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 5 }} />
             </Container>
         </ThemeProvider>
     );
